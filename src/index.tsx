@@ -20,13 +20,20 @@ const App = () => {
     startService();
   }, []);
 
-  const onClick = () => {
+  const onClick =  async () => {
     //console.log(input);
     if (!ref.current) {
       return;
     }
 
-    console.log(ref.current);
+    //console.log(ref.current);
+    const result = await ref.current.transform(input, {
+      loader: 'jsx',
+      target: 'es2015'
+    });
+
+    //console.log(result);
+    setCode(result.code);
   };
 
   return (
