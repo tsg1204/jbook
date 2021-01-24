@@ -2,6 +2,7 @@ import * as esbuild from 'esbuild-wasm';
 import axios from 'axios';
 import localForage from 'localforage';
 
+//store packages locally for faster access
 const fileCache = localForage.createInstance({
   name: 'filecache'
 });
@@ -13,7 +14,7 @@ const fileCache = localForage.createInstance({
 //   console.log(color);
 // })()
 
-export const unpkgPathPlugin = () => {
+export const unpkgPathPlugin = (inputCode: string) => {
   return {
     name: 'unpkg-path-plugin',
     setup(build: esbuild.PluginBuild) {
@@ -42,17 +43,12 @@ export const unpkgPathPlugin = () => {
         if (args.path === 'index.js') {
           return {
             loader: 'jsx',
-            contents: `
-              import React, { useState } from 'react-select';
-              console.log(React, useState);
-            `,
+            contents: inputCode,
           };
         }
-
         //Check to see if we have already fetched this file
         //and if it is in the cache
         const cachedResult = await fileCache.getItem<esbuild.OnLoadResult>(args.path);
-
         //if it is, return it immediately
         if (cachedResult) {
           return cachedResult;
