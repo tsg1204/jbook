@@ -22,11 +22,6 @@ const editorRef = useRef<any>();
   };
 
   const onFormatClick = () => {   
-
-
-
-
-
     //console.log(editorRef.current);
     //get current value from editor
     const unformatted = editorRef.current.getModel().getValue();
@@ -45,7 +40,12 @@ const editorRef = useRef<any>();
 
   return (
     <div>
-      <button onClick={onFormatClick}>Format</button>
+      <button 
+      className="button button-format is-primary is-small"
+        onClick={onFormatClick}
+        >
+          Format
+        </button>
       <MonacoEditor 
         editorDidMount={onEditorDidMount}
         value={initialValue}
