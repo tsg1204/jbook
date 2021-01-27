@@ -7,8 +7,8 @@ interface CellsState {
   error: string | null;
   order: string[];
   data: {
-    [key: string]: Cell
-  }
+    [key: string]: Cell;
+  };
 }
 
 const initialState: CellsState = {
@@ -19,7 +19,7 @@ const initialState: CellsState = {
 }
 
 const reducer = (state: CellsState = initialState, action: Action): CellsState =>  {
-  swithc(action.type) {
+  switch(action.type) {
     case ActionType.UPDATE_CELL:
       return state;
     case ActionType.DELETE_CELL:
