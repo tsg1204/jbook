@@ -7,7 +7,7 @@ import { Cell } from '../state';
 import { useActions } from '../hooks/use-actions';
 
 interface CodeCellProps {
-  cell: Cell
+  cell: Cell;
 }
 
 const CodeCell: React.FC<CodeCellProps> = ( { cell }) => {
